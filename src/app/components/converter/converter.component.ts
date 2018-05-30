@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CurrencyComponent } from '../../actions/currency.action';
 
 @Component({
   selector: 'app-converter',
@@ -6,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./converter.component.scss']
 })
 export class ConverterComponent implements OnInit {
-  opened: boolean = false;
-  currencies: Array<string> = ["CAD", "USD", "EUR"];
+  opened: Boolean = false;
+  currencies: Array<string> = ['CAD', 'USD', 'EUR'];
 
-  constructor() { }
+  // constructor(private store: Store<any>) { }
 
   ngOnInit() {
+    // this.store.dispatch(new CurrencyComponent('5'));
   }
 
   open() {
