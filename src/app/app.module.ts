@@ -1,16 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {NglModule} from 'ng-lightning/ng-lightning';
 
 import { AppComponent } from './app.component';
+import { ConverterComponent } from './converter/converter.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConverterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NglModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

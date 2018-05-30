@@ -1,5 +1,8 @@
 # CurrencyConverter
 
+
+Depends on @salesforce-ux/design-system: 2.6.1
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
