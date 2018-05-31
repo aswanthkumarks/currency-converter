@@ -3,7 +3,7 @@ import * as currencyReducer from './currency.reducer';
 import { environment } from '../../environments/environment';
 
 export interface AppState {
-    currencyConversion: currencyReducer.IConvertionComponents;
+    currencyConversion: Array<currencyReducer.IConvertion>;
 }
 
 export const reducers: ActionReducerMap<AppState> = {

@@ -1,20 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CurrencyComponent } from '../../actions/currency.action';
+import { Observable } from 'rxjs/Observable';
+import { ISubscription } from 'rxjs/Subscription';
+import * as _ from 'lodash';
+import { CurrencyComponent, CurrencyComponentDestroy, CurrencyComponentUpdate } from '../../actions/currency.action';
+import * as converionReducer from '../../reducers/currency.reducer';
 
 @Component({
   selector: 'app-converter',
   templateUrl: './converter.component.html',
   styleUrls: ['./converter.component.scss']
 })
-export class ConverterComponent implements OnInit {
+export class ConverterComponent implements OnInit, OnDestroy {
+  @Input() key: string = 'XX';
   opened: Boolean = false;
   currencies: Array<string> = ['CAD', 'USD', 'EUR'];
-
-  // constructor(private store: Store<any>) { }
+  convertionComponents: Observable<converionReducer.IConvertion[]>;
+  componentInfo: converionReducer.IConvertion = converionReducer.defaultItem;
+  storeSub: ISubscription;
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
-    // this.store.dispatch(new CurrencyComponent('5'));
+    this.store.dispatch(new CurrencyComponent(this.key));
+    this.convertionComponents = this.store.select(converionReducer.getConversionComponents);
+    this.storeSub = this.convertionComponents.subscribe(components => {
+      this.componentInfo = _.find(components, { key: this.key });
+    });
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new CurrencyComponentDestroy(this.key));
+    this.storeSub.unsubscribe();
+  }
+
+  updateForm(field) {
+    this.store.dispatch(new CurrencyComponentUpdate(
+      this.key, field, _.get(this.componentInfo, field, '')
+    ));
   }
 
   open() {
