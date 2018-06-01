@@ -14,7 +14,7 @@ import { CurrencyService } from './services/currency.service';
 import { CurrencyEffects } from './effects/currency.effects';
 
 import { environment } from '../environments/environment';
-import { reducers, metaReducers } from './reducers';
+import { reducers } from './reducers';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { OnlyNumbersDirective } from './directives/only-numbers.directive';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot(reducers, {  }),//metaReducers
+    StoreModule.forRoot(reducers, {}),
     NglModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
