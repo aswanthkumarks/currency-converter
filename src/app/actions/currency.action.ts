@@ -8,8 +8,8 @@ export enum CurrencyActionTypes {
     newComponent = '[Currency] Create Component',
     deleteComponent = '[Currency] Destroy Component',
     updateCurrencyInfo = '[Currency] Field Update',
-    convertCurrency = '[Currency] Convert amount',
     convertionError = '[Currency] Convertion ERROR',
+    fetchCurrencyRatio = '[Currency] Fetch Ratio',
     updateCurrencyRatio = '[Currency] Ratio'
 }
 
@@ -41,26 +41,6 @@ export class CurrencyComponentUpdate implements Action {
 }
 
 /**
- * To update converted value in store
- * @param key identifier of component
- * @param value currency result value to be updated
- */
-export class CurrencyConvertionUpdate implements Action {
-    readonly type = CurrencyActionTypes.updateCurrencyInfo;
-    readonly field = 'currencyToValue';
-    constructor(public key: string, public value: string) {}
-}
-
-/**
- * action to trigger convertion operation
- * @param payload convertion component info
- */
-export class ConvertCurrency implements Action {
-    readonly type = CurrencyActionTypes.convertCurrency;
-    constructor(public payload: IConvertion) {}
-}
-
-/**
  * Action triggered on convertion api error
  * @param payload error object
  */
@@ -69,10 +49,19 @@ export class CurrencyConvertionError implements Action {
     constructor(public payload: any) {}
 }
 
+export class FetchCurrencyInfo implements Action {
+    readonly type = CurrencyActionTypes.fetchCurrencyRatio;
+}
+
+export class CurrencyRatioInfo implements Action {
+    readonly type = CurrencyActionTypes.updateCurrencyRatio;
+    constructor(public payload: any) {}
+}
+
 export type CurrencyActionsUnion =
     CurrencyComponent |
     CurrencyComponentDestroy |
     CurrencyComponentUpdate |
-    ConvertCurrency |
-    CurrencyConvertionUpdate |
-    CurrencyConvertionError ;
+    CurrencyConvertionError |
+    CurrencyRatioInfo |
+    FetchCurrencyInfo ;
