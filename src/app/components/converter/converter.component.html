@@ -15,7 +15,13 @@
       <div class="slds-grid slds-gutters">
         <div class="slds-col slds-size_4-of-5">
           <ngl-form-element label="Type in amount and select currency:" [error]="hasError ? error : null" class="slds-m-top--small">
-            <input nglFormControl (change)="updateForm('currencyFromValue')" type="text" [(ngModel)]="componentInfo.currencyFromValue" placeholder="0.00" [required]="required">
+            <input
+              nglFormControl
+              (change)="updateForm('currencyFromValue')"
+              type="text"
+              appOnlyNumbers
+              [(ngModel)]="componentInfo.currencyFromValue"
+              [required]="required">
           </ngl-form-element>
         </div>
         <div class="slds-col slds-size_1-of-5">
@@ -29,15 +35,14 @@
       <div class="slds-grid slds-gutters">
         <div class="slds-col slds-size_4-of-5">
           <ngl-form-element label="Converted amount:" [error]="hasError ? error : null" class="slds-m-top--small">
-            <input [disabled]="true" [(ngModel)]="componentInfo.currencyToValue" nglFormControl type="text" placeholder="0.00" [required]="required">
+            <input [disabled]="true" [(ngModel)]="componentInfo.currencyToValue" nglFormControl type="number" [required]="required">
           </ngl-form-element>
         </div>
         <div class="slds-col slds-size_1-of-5">
             <ngl-form-element label="" [error]="hasError ? error : null" class="slds-m-top--small">
               <select nglFormControl  (change)="updateForm('currencyToCode')" [(ngModel)]="componentInfo.currencyToCode" class="slds-select" [required]="required">
-                <option *ngFor="let currency of currencies" [ngValue]="componentInfo.currencyToCode">{{currency}}</option>
-              </select>
-              
+                <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
+              </select>            
             </ngl-form-element>
         </div>
       </div>
@@ -51,9 +56,8 @@
 
     <ngl-modal header='Disclaimer' [(open)]="opened">
       <div body>
-        <p>Sit nulla est ex deserunt exercitation anim occaecat. Tempor cupidatat consequat elit dolor adipisicing.</p>
-        <p>Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia.</p>
-        <p>Labore esse esse cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.</p>
+        <p>Using Fixer.io Forex Free service</p>
+        <p>Only supports 1000 request pre month</p>
       </div>
       <ng-template ngl-modal-footer>
         <button class="slds-button slds-button--neutral" (click)="cancel()">Cancel</button>

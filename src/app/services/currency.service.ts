@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CurrencyService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  convertCurrency(payload) {
+    return this.http.get(
+      `${environment.forex_api}/latest?access_key=${environment.forex_key}&symbols=CAD,USD,EUR`
+    );
+  }
 
 }
