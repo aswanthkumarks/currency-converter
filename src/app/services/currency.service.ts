@@ -7,6 +7,9 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get convertion information from forex service provider
+   */
   convertCurrency(payload) {
     return this.http.get(
       `${environment.forex_api}/latest?access_key=${environment.forex_key}&symbols=CAD,USD,EUR`

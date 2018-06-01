@@ -35,7 +35,10 @@ export class ConverterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new CurrencyComponentDestroy(this.key));
     this.storeSub.unsubscribe();
   }
-
+  /**
+   * For updating the store and initating convertion process
+   * @param field form field which is changed
+   */
   updateForm(field) {
     console.log(this.componentInfo);
     this.store.dispatch(new ConvertCurrency(
@@ -48,10 +51,16 @@ export class ConverterComponent implements OnInit, OnDestroy {
     ));
   }
 
+  /**
+   * To open discamer popup
+   */
   open() {
     this.opened = !this.opened;
   }
 
+  /**
+   * To Close disclamer popup
+   */
   cancel() {
     this.opened = false;
   }
